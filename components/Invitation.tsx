@@ -60,8 +60,18 @@ export function Invitation() {
     window.scrollTo(0, 0);
     setOpened(true);
     burstPetals(30);
-    if (music) audio.current?.play().catch(() => {});
     requestAnimationFrame(() => ScrollTrigger.refresh());
+  };
+
+  // Start the song on the seal tap and fade it in softly
+  const startMusic = () => {
+    const a = audio.current;
+    if (!music || !a) return;
+    a.volume = 0;
+    a.play().then(() => {
+      let v = 0;
+      const id = setInterval(() => { v = Math.min(0.55, v + 0.03); a.volume = v; if (v >= 0.55) clearInterval(id); }, 120);
+    }).catch(() => {});
   };
 
   const toggleMusic = () => {
@@ -75,7 +85,7 @@ export function Invitation() {
       <SmoothScroll locked={!opened}>
         <Preloader />
         <Cursor />
-        {!introGone && <Intro guest={guest} autoOpen={autoOpen} onOpen={handleOpen} onDone={() => setIntroGone(true)} />}
+        {!introGone && <Intro guest={guest} autoOpen={autoOpen} onTap={startMusic} onOpen={handleOpen} onDone={() => setIntroGone(true)} />}
         <TopBar opened={opened} />
         <main id="site" aria-hidden={!opened}>
           <Hero opened={opened} />
@@ -90,7 +100,7 @@ export function Invitation() {
         </main>
         {music && (
           <>
-            <audio ref={audio} src={music} loop preload="none" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
+            <audio ref={audio} src={music} loop preload="auto" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
             <motion.button className={`music-btn${playing ? " playing" : ""}`} type="button" aria-label="Play or pause music"
               onClick={toggleMusic} whileTap={{ scale: 0.9 }} initial={{ opacity: 0, scale: 0.5 }} animate={opened ? { opacity: 1, scale: 1 } : {}}>
               <span className="ring" /><Svg html={ui.music} />

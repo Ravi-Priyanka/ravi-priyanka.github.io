@@ -7,8 +7,8 @@ export const WEDDING = {
   config: {
     // Countdown counts down to the wedding ceremony (4:00 AM after Wednesday night, India time).
     countdownTo: "2026-12-10T04:00:00+05:30",
-    // Put a song at public/music.mp3 and set this to "/music.mp3" to show the music button.
-    music: ""
+    // Background song (starts when the doors open). Replace public/music.m4a to change it; set "" to turn music off.
+    music: "/music.m4a" // "Indian Wedding Celebration" by OpenMindAudio (Pixabay, royalty-free)
   },
 
   couple: {

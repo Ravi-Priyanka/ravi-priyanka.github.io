@@ -7,7 +7,7 @@ import { WEDDING } from "@/lib/content";
 const T = WEDDING.text;
 
 /** Royal palace doors. Tapping the Ganesh medallion lights the seam and swings the doors open. */
-export function Intro({ guest, autoOpen, onOpen, onDone }: { guest: string; autoOpen: boolean; onOpen: () => void; onDone: () => void }) {
+export function Intro({ guest, autoOpen, onTap, onOpen, onDone }: { guest: string; autoOpen: boolean; onTap?: () => void; onOpen: () => void; onDone: () => void }) {
   const [stage, setStage] = useState<0 | 1 | 2 | 3>(0);
   const [dust, setDust] = useState<React.CSSProperties[]>([]);
 
@@ -20,6 +20,7 @@ export function Intro({ guest, autoOpen, onOpen, onDone }: { guest: string; auto
 
   const open = () => {
     if (stage) return;
+    onTap?.(); // runs inside the tap itself, so phones allow the music to start
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const t = reduce ? [0, 50, 100, 200] : [0, 650, 1150, 2600];
     setTimeout(() => setStage(1), t[0]);   // medallion glows, text fades
