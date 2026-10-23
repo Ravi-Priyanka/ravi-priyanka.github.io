@@ -1021,3 +1021,6 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   .fam-tab b { font-size: 1rem; letter-spacing: 0; }
   .fam-tab .fam-ind { inset: auto 10% -1px 10%; }
 }
+/* Centre the scroll cue without relying on transform (its fade-in animation uses transform) */
+.scroll-cue { left: 0; right: 0; margin-inline: auto; width: max-content; translate: none; transform: none; }
+body:not(.opened) .scroll-cue[data-in] { transform: translateY(22px); }
