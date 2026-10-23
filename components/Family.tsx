@@ -25,8 +25,11 @@ const chip: Variants = {
   show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 260, damping: 18 } },
 };
 
+/** Each line on a plate starts with a capital ("the late …" → "The late …"). */
+const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+
 function Plate({ name }: { name: string }) {
-  const parts = name.split(" & ");
+  const parts = name.split(" & ").map(cap);
   return (
     <motion.li className={`plate${parts.length === 2 ? "" : " note"}`} variants={item} whileHover={{ y: -4 }}>
       <span className="p1">{parts[0]}</span>
