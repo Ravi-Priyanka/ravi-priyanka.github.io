@@ -102,7 +102,7 @@ export function Baraat() {
       const touch = window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
       let walkTimer: ReturnType<typeof setTimeout>;
       const tl = gsap.timeline({
-        defaults: { ease: "none" },
+        defaults: { ease: "none", duration: 1 }, // every tween spans the whole pinned scroll
         scrollTrigger: {
           trigger: root.current, start: "top top", pin: true, scrub: touch ? true : 0.8, anticipatePin: 1, invalidateOnRefresh: true,
           end: () => "+=" + Math.round(innerWidth * 0.5 + el.offsetWidth),
