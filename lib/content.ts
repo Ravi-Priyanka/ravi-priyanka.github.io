@@ -131,10 +131,10 @@ export const WEDDING = {
       mapQuery: "Mateshwari Hotel and Restaurant, Pindwara Circle, NH 27, Kojra, Rajasthan"
     },
     {
-      id: "preetibhoj",
+      id: "pratibhoj",
       icon: "thali",
       name: "Reception Feast",
-      note: "Preetibhoj — a celebratory meal with family and friends",
+      note: "Pratibhoj — a celebratory meal with family and friends",
       day: "Thursday", date: "10 December 2026", time: "12 noon – 4:00 PM",
       venue: "Mateshwari Hotel & Restaurant, Pindwara",
       start: "2026-12-10T12:00:00+05:30", end: "2026-12-10T16:00:00+05:30",
