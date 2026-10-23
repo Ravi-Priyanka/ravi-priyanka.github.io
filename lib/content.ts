@@ -22,7 +22,7 @@ export const WEDDING = {
   },
 
   text: {
-    blessing: "Shri Ganeshaya Namah",
+    blessing: "Shree Ganeshay Namah",
     tapToOpen: "Tap the seal to open",
     envelopeFor: "A personal invitation for",
     guestDefault: "You & Your Family",
@@ -45,7 +45,7 @@ export const WEDDING = {
 
     inviteEyebrow: "The invitation",
     invocations: [
-      "Shri Ganeshaya Namah", "Shri Dharti Mataya Namah", "Shri Parmatmaya Namah",
+      "Shree Ganeshay Namah", "Shri Dharti Mataya Namah", "Shri Parmatmaya Namah",
       "Shri Naklang Devaya Namah", "Shri Saraswati Mataya Namah"
     ],
     doha: "Peli devat sumarlo Gajanand ko naam,\nsukh sampat seva kare to toy kare siddh kaam.",
@@ -105,7 +105,7 @@ export const WEDDING = {
     mithiText: "Please, please come to our Mamaji's wedding!",
     mithiFrom: "With love from",
     mithiNames: "Monika, Girish, Mahi, Yahvi, Vedanshi, Advika, Daksh, Mishrut, Kaushal, Harsh, Nakshit & Khushal",
-    footer: "Shri Ganeshaya Namah · Ravi & Priyanka · 09.12.2026"
+    footer: "Shree Ganeshay Namah · Ravi & Priyanka · 09.12.2026"
   },
 
   // Celebrations, shown as arched cards. Times are India time.
