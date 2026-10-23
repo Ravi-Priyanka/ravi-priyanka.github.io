@@ -42,7 +42,7 @@ Put an MP3 at `public/music.mp3` and set `music: "/music.mp3"` in `lib/content.t
 
 ## Free hosting on GitHub Pages
 
-This repo deploys itself: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to **https://ravi110897.github.io**.
+This repo deploys itself: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to **https://ravi-priyanka.github.io**.
 
 To make a change: edit the files (usually `lib/content.ts`), then
 
