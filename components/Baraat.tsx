@@ -105,7 +105,7 @@ export function Baraat() {
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: root.current, start: "top top", pin: true, scrub: touch ? true : 0.8, anticipatePin: 1, invalidateOnRefresh: true,
-          end: () => "+=" + Math.round(el.offsetWidth + innerWidth * 0.9),
+          end: () => "+=" + Math.round(innerWidth * 0.5 + el.offsetWidth),
           onUpdate: self => {
             if (touch || Math.abs(self.getVelocity()) < 5) return;
             el.classList.add("walking");
@@ -114,7 +114,7 @@ export function Baraat() {
           },
         },
       });
-      tl.fromTo(el, { x: () => innerWidth * 0.9 }, { x: () => innerWidth * 0.08 - el.offsetWidth, force3D: true }, 0)
+      tl.fromTo(el, { x: () => innerWidth * 0.85 }, { x: () => innerWidth * 0.35 - el.offsetWidth, force3D: true }, 0)
         .fromTo(".route-fill", { scaleX: 0 }, { scaleX: 1 }, 0)
         .fromTo(".route-dot", { left: "0%" }, { left: "100%" }, 0)
         .fromTo(".route .end", { opacity: 0.45 }, { opacity: 1, duration: 0.15 }, 0.85);
