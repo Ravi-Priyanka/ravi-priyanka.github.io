@@ -1027,3 +1027,20 @@ body:not(.opened) .scroll-cue[data-in] { transform: translateY(22px); }
 /* Keep each invocation phrase on one line; lines break only at the ✦ separators */
 .card .invocations .inv { white-space: nowrap; }
 .card .invocations i { margin: 0 .35em; }
+
+/* =========================================================
+   Phone performance: drop effects that are costly to repaint while scrolling
+   ========================================================= */
+.baraat.night .procession { will-change: transform; }
+.b-fireworks, .b-palace { will-change: auto; }
+@media (max-width: 700px), (pointer: coarse) {
+  .baraat.night .procession { filter: none; }
+  .baraat.night .procession img { animation: none !important; }
+  .route-card { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(58,14,40,.82); }
+  .b-palace { filter: none; background-image: linear-gradient(rgba(28,7,22,.55), rgba(28,7,22,.55)), url("/img/hero-wide.webp"); }
+  .b-palace::after { mix-blend-mode: normal; opacity: .5; }
+  .b-stars i { box-shadow: none; animation-duration: 5s; }
+  .b-lights .bulb { filter: none; animation: none; opacity: .95; }
+  .grain { display: none; }
+  .cd-unit, .ft-col, .contact, .mithi { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}

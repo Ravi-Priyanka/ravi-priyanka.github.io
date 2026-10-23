@@ -25,9 +25,10 @@ function Fireworks({ active }: { active: boolean }) {
     const cv = ref.current!, ctx = cv.getContext("2d")!;
     type P = { x: number; y: number; vx: number; vy: number; life: number; max: number; c: string; s: number };
     let parts: P[] = [], raf = 0, last = 0, w = 0, h = 0;
+    const small = window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
     const COLS = ["#F1DFAE", "#E4C77A", "#FFD27A", "#F4C7CC", "#E7A3AE", "#FFFFFF"];
     const size = () => {
-      const dpr = Math.min(2, devicePixelRatio || 1), r = cv.getBoundingClientRect();
+      const dpr = small ? 1 : Math.min(2, devicePixelRatio || 1), r = cv.getBoundingClientRect();
       w = r.width; h = r.height; cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     const burst = () => {
@@ -35,7 +36,7 @@ function Fireworks({ active }: { active: boolean }) {
       const side = Math.random() < 0.5;
       const x = w < 700 ? w * (0.15 + Math.random() * 0.7) : side ? w * (0.04 + Math.random() * 0.22) : w * (0.74 + Math.random() * 0.22);
       const y = h * (0.15 + Math.random() * 0.4);
-      const c = COLS[(Math.random() * COLS.length) | 0], n = 46 + ((Math.random() * 20) | 0);
+      const c = COLS[(Math.random() * COLS.length) | 0], n = small ? 26 + ((Math.random() * 8) | 0) : 46 + ((Math.random() * 20) | 0);
       for (let i = 0; i < n; i++) {
         const a = (i / n) * Math.PI * 2, sp = 1.2 + Math.random() * 2.4;
         parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0, max: 60 + Math.random() * 30, c, s: 1.2 + Math.random() * 1.4 });
@@ -45,7 +46,8 @@ function Fireworks({ active }: { active: boolean }) {
       ctx.globalCompositeOperation = "destination-out";
       ctx.fillStyle = "rgba(0,0,0,.22)"; ctx.fillRect(0, 0, w, h);
       ctx.globalCompositeOperation = "lighter";
-      if (on.current && t - last > 900 + Math.random() * 900) { burst(); last = t; }
+      if (on.current && t - last > (small ? 1600 : 900) + Math.random() * 900) { burst(); last = t; }
+      if (!on.current && !parts.length) { raf = requestAnimationFrame(loop); return; }
       parts = parts.filter(p => p.life < p.max);
       for (const p of parts) {
         p.life++; p.vx *= 0.975; p.vy = p.vy * 0.975 + 0.035; p.x += p.vx; p.y += p.vy;
@@ -93,29 +95,31 @@ export function Baraat() {
 
   useGSAP(() => {
     ScrollTrigger.create({ trigger: root.current, start: "top 80%", end: "bottom 20%", onToggle: s => setInView(s.isActive) });
+    ScrollTrigger.config({ ignoreMobileResize: true });
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const el = pro.current!;
+      const touch = window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
       let walkTimer: ReturnType<typeof setTimeout>;
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
-          trigger: root.current, start: "top top", pin: true, scrub: 0.8, invalidateOnRefresh: true,
+          trigger: root.current, start: "top top", pin: true, scrub: touch ? true : 0.8, anticipatePin: 1, invalidateOnRefresh: true,
           end: () => "+=" + Math.round(el.offsetWidth + innerWidth * 0.9),
           onUpdate: self => {
-            if (Math.abs(self.getVelocity()) < 5) return;
+            if (touch || Math.abs(self.getVelocity()) < 5) return;
             el.classList.add("walking");
             clearTimeout(walkTimer);
             walkTimer = setTimeout(() => el.classList.remove("walking"), 220);
           },
         },
       });
-      tl.fromTo(el, { x: () => innerWidth * 0.9 }, { x: () => innerWidth * 0.08 - el.offsetWidth }, 0)
-        .fromTo(".b-palace", { xPercent: 3 }, { xPercent: -5 }, 0)
-        .fromTo(".b-moon", { y: 20 }, { y: -30 }, 0)
+      tl.fromTo(el, { x: () => innerWidth * 0.9 }, { x: () => innerWidth * 0.08 - el.offsetWidth, force3D: true }, 0)
         .fromTo(".route-fill", { scaleX: 0 }, { scaleX: 1 }, 0)
         .fromTo(".route-dot", { left: "0%" }, { left: "100%" }, 0)
         .fromTo(".route .end", { opacity: 0.45 }, { opacity: 1, duration: 0.15 }, 0.85);
+      // Gentle background drift only on larger screens (keeps phones smooth)
+      if (!touch) tl.fromTo(".b-palace", { xPercent: 3 }, { xPercent: -5 }, 0).fromTo(".b-moon", { y: 20 }, { y: -30 }, 0);
     });
   }, { scope: root });
 
