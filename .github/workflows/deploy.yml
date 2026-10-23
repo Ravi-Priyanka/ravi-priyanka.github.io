@@ -25,7 +25,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm install --no-audit --no-fund
-      - run: npm run build
+      # Google Fonts downloads occasionally fail on the runner; retry the build up to 3 times
+      - run: npm run build || (sleep 20 && npm run build) || (sleep 40 && npm run build)
         env:
           NEXT_PUBLIC_SITE_URL: https://ravi-priyanka.github.io
           NEXT_TELEMETRY_DISABLED: 1
