@@ -149,7 +149,7 @@ export const WEDDING = {
       names: [
         "Smt. Tulsidevi & the late Shri Anaji Parmar",
         "Smt. Jamnadevi & Shri Raghunathji Parmar",
-        "Smt. Shantidevi & Shri Veeramji Parmar",
+        "Smt. Shantidevi & Shri Veeraramji Parmar",
         "The late Smt. Savitadevi & Shri Chelaramji Parmar",
         "Smt. Bebidevi & Shri Bhanwarlalji Parmar",
         "Smt. Mamtadevi & Shri Dineshji Parmar",
