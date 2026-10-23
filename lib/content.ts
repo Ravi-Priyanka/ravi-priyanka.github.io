@@ -186,7 +186,7 @@ export const WEDDING = {
 
   contacts: [
     { name: "Shri Bhanwarlalji Parmar", phone: "9820162732" },
-    { name: "Parmar Family", phone: "9819183391" },
+    { name: "Shri Veeraramji Parmar", phone: "9819183391" },
     { name: "Ravi", phone: "7303366970" },
     { name: "Khushal", phone: "8976352508" }
   ]
