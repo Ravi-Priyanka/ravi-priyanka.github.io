@@ -1024,3 +1024,6 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 /* Centre the scroll cue without relying on transform (its fade-in animation uses transform) */
 .scroll-cue { left: 0; right: 0; margin-inline: auto; width: max-content; translate: none; transform: none; }
 body:not(.opened) .scroll-cue[data-in] { transform: translateY(22px); }
+/* Keep each invocation phrase on one line; lines break only at the ✦ separators */
+.card .invocations .inv { white-space: nowrap; }
+.card .invocations i { margin: 0 .35em; }

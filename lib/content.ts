@@ -45,8 +45,8 @@ export const WEDDING = {
 
     inviteEyebrow: "The invitation",
     invocations: [
-      "Shree Ganeshay Namah", "Shri Dharti Mataya Namah", "Shri Parmatmaya Namah",
-      "Shri Naklang Devaya Namah", "Shri Saraswati Mataya Namah"
+      "Shree Ganeshay Namah", "Shri Dharti Matay Namah", "Shri Parmatmay Namah",
+      "Shri Naklang Devay Namah", "Shri Saraswati Matay Namah"
     ],
     doha: "Peli devat sumarlo Gajanand ko naam,\nsukh sampat seva kare to toy kare siddh kaam.",
     dohaMeaning: "Before all else, remember the name of Lord Gajanand. Serve him, and he blesses us with joy and prosperity and brings every task to fulfilment. He is the son of Goddess Parvati, named Ganpati by his father, Lord Shankar.",

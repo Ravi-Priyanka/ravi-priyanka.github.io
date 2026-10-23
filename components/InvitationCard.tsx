@@ -24,7 +24,7 @@ export function InvitationCard() {
         <div className="body">
           <span className="eyebrow">{T.inviteEyebrow}</span>
           <p className="invocations">
-            {T.invocations.map((x, i) => <span key={x}>{i > 0 && <i aria-hidden="true">✦</i>}{x}</span>)}
+            {T.invocations.map((x, i) => <span key={x}>{i > 0 && <> <i aria-hidden="true">✦</i> </>}<span className="inv">{x}</span></span>)}
           </p>
           <p className="shloka">{T.doha}</p>
           <p className="meaning">{T.dohaMeaning}</p>
