@@ -12,13 +12,13 @@ export const WEDDING = {
   },
 
   couple: {
-    groom: "Ravindra",
-    bride: "Saumya",
+    groom: "Ravi",
+    bride: "Priyanka",
     groomFull: "Ravindra Parmar",
     groomNick: "Ravi",
     brideFull: "Saumya",
     brideNick: "Priyanka",
-    monogram: ["R", "S"]
+    monogram: ["R", "P"]
   },
 
   text: {
@@ -72,6 +72,13 @@ export const WEDDING = {
     baraatTitle: "Join the Procession",
     baraatText: "On Wednesday night, 9 December 2026, at 11:30 PM, the baraat will set out from the home of Shri Bhanwarlalji Anaji Parmar in Padmavati Colony and arrive at Mateshwari Hotel & Restaurant (Circle Pindwara, NH-27, Kojra, Rajasthan).",
     baraatHint: "Scroll to walk with the baraat",
+    baraatTagline: "Dance with us to the beat of the dhol, under the stars.",
+    baraatTime: "Wed, 9 Dec · 11:30 PM",
+    baraatFrom: "Padmavati Colony",
+    baraatFromSub: "Home of Shri Bhanwarlalji Anaji Parmar",
+    baraatTo: "Mateshwari Hotel",
+    baraatToSub: "& Restaurant · Circle Pindwara, NH-27, Kojra",
+    baraatMap: "Mateshwari Hotel and Restaurant, Pindwara Circle, NH 27, Kojra, Rajasthan",
 
     eventsEyebrow: "Celebrations",
     eventsTitle: "Wedding Festivities",
@@ -98,7 +105,7 @@ export const WEDDING = {
     mithiText: "Please, please come to our Mamaji's wedding!",
     mithiFrom: "With love from",
     mithiNames: "Monika, Girish, Mahi, Yahvi, Vedanshi, Advika, Daksh, Mishrut, Kaushal, Harsh, Nakshit & Khushal",
-    footer: "Shri Ganeshaya Namah · Ravindra & Saumya · 09.12.2026"
+    footer: "Shri Ganeshaya Namah · Ravi & Priyanka · 09.12.2026"
   },
 
   // Celebrations, shown as arched cards. Times are India time.
@@ -138,17 +145,7 @@ export const WEDDING = {
   // Family lists from the inside card. Empty groups are hidden.
   family: [
     {
-      title: "Maternal Family", sub: "Nanihal Paksh",
-      names: [
-        "Smt. Nenudevi & Shri Kesharamji Bhati",
-        "Smt. Vimladevi & Shri Ganeshji Bhati",
-        "Smt. Leeladevi & Shri Himmatji Bhati",
-        "Smt. Monikadevi & Shri Mahendraji Bhati",
-        "and the entire Bhati family"
-      ]
-    },
-    {
-      title: "Eagerly Awaiting You", sub: "Darshanabhilashi",
+      title: "Eagerly Awaiting You", tab: "Awaiting You", sub: "Darshanabhilashi",
       names: [
         "Smt. Tulsidevi & the late Shri Anaji Parmar",
         "Smt. Jamnadevi & Shri Raghunathji Parmar",
@@ -165,7 +162,7 @@ export const WEDDING = {
       ]
     },
     {
-      title: "Sons-in-law & Daughters", sub: "Jamai Paksh",
+      title: "Sons-in-law & Daughters", tab: "Sons-in-law", sub: "Jamai Paksh",
       names: [
         "Smt. Falgunidevi & Shri Kaluramji Devda",
         "Smt. Savitadevi & Shri Gopalji Bhati",
@@ -174,12 +171,24 @@ export const WEDDING = {
         "Smt. Bhavnadevi & Shri Punaramji Gehlot",
         "Smt. Sonaldevi & Shri Chiragji Gehlot"
       ]
+    },
+    {
+      title: "Maternal Family", tab: "Maternal", sub: "Nanihal Paksh",
+      names: [
+        "Smt. Nenudevi & Shri Kesharamji Bhati",
+        "Smt. Vimladevi & Shri Ganeshji Bhati",
+        "Smt. Leeladevi & Shri Himmatji Bhati",
+        "Smt. Monikadevi & Shri Mahendraji Bhati",
+        "and the entire Bhati family"
+      ]
     }
   ],
 
   contacts: [
     { name: "Shri Bhanwarlalji Parmar", phone: "9820162732" },
-    { name: "Parmar Family", phone: "9819183391" }
+    { name: "Parmar Family", phone: "9819183391" },
+    { name: "Ravi", phone: "7303366970" },
+    { name: "Khushal", phone: "8976352508" }
   ]
 };
 

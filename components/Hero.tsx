@@ -60,8 +60,8 @@ export function Hero({ opened }: { opened: boolean }) {
     <section className="hero" id="top" ref={root}>
       <div className="hero-layer">
         <picture>
-          <source media="(min-aspect-ratio: 1/1)" srcSet="/img/hero-wide.webp" />
-          <img className="hero-img" src="/img/hero-portrait.webp" alt="A pink Rajasthani palace at dawn, framed by cherry blossoms" fetchPriority="high" />
+          <source media="(min-aspect-ratio: 1/1)" srcSet="/img/hero-wide.webp 2560w, /img/hero-wide-2x.webp 3840w" sizes="100vw" />
+          <img className="hero-img" src="/img/hero-portrait.webp" srcSet="/img/hero-portrait.webp 1440w, /img/hero-portrait-2x.webp 2160w" sizes="100vw" alt="A pink Rajasthani palace at dawn, framed by cherry blossoms" fetchPriority="high" />
         </picture>
       </div>
       <div className="veil" />

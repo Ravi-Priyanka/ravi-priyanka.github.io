@@ -39,3 +39,15 @@ Put an MP3 at `public/music.mp3` and set `music: "/music.mp3"` in `lib/content.t
 ## Personal links
 
 `https://yourdomain.in/?to=Sharma Family` shows the family's name on the doors and in the welcome greeting.
+
+## Free hosting on GitHub Pages
+
+This repo deploys itself: every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to **https://ravi110897.github.io**.
+
+To make a change: edit the files (usually `lib/content.ts`), then
+
+```bash
+git add -A && git commit -m "Update invitation" && git push
+```
+
+The site updates about 1–2 minutes later (progress under the repo's **Actions** tab).

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { WEDDING } from "@/lib/content";
 import { Reveal } from "./Reveal";
+import { SplitTitle } from "./SplitTitle";
 
 const T = WEDDING.text;
 const target = new Date(WEDDING.config.countdownTo).getTime();
@@ -46,7 +47,7 @@ export function Countdown() {
       <span className="band t" /><span className="band b" />
       <Reveal className="head">
         <span className="eyebrow">{T.countdownEyebrow}</span>
-        <h2 className="title"><em>{T.countdownTitle}</em></h2>
+        <SplitTitle className="title" text={T.countdownTitle} italic />
       </Reveal>
       {v === null ? (
         <div className="cd-done gold-text">{T.countdownDone}</div>

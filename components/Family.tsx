@@ -5,6 +5,7 @@ import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { WEDDING } from "@/lib/content";
 import { divider } from "@/lib/art";
 import { Reveal } from "./Reveal";
+import { SplitTitle } from "./SplitTitle";
 import { Svg } from "./Svg";
 
 const T = WEDDING.text;
@@ -51,7 +52,7 @@ export function Family() {
     <section className="section family" id="family">
       <Reveal className="head">
         <span className="eyebrow">{T.familyEyebrow}</span>
-        <h2 className="title">{T.familyTitle}</h2>
+        <SplitTitle className="title" text={T.familyTitle} />
         <p className="lead">{T.familyText}</p>
       </Reveal>
       <Reveal className="fam-tabs" delay={0.1}>
@@ -59,8 +60,8 @@ export function Family() {
           {groups.map((x, i) => (
             <button key={x.title} className={`fam-tab${i === active ? " on" : ""}`} role="tab" type="button"
               aria-selected={i === active} tabIndex={i === active ? 0 : -1} onClick={() => setActive(i)}>
-              {i === active && <motion.span layoutId="fam-ind" className="fam-ind" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
-              <b>{x.title}</b><small>{x.sub}</small>
+              <b>{x.tab}</b><small>{x.sub}</small>
+              {i === active && <motion.span layoutId="fam-ind" className="fam-ind" transition={{ type: "spring", stiffness: 380, damping: 32 }}><i /></motion.span>}
             </button>
           ))}
         </div>

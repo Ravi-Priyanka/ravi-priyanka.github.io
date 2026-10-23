@@ -18,6 +18,10 @@ import { Family } from "./Family";
 import { Closing } from "./Closing";
 import { Petals, burstPetals } from "./Petals";
 import { Svg } from "./Svg";
+import { Preloader } from "./Preloader";
+import { Cursor } from "./Cursor";
+import { Marquee } from "./Marquee";
+import { MobileDock } from "./MobileDock";
 
 /** The whole invitation: palace doors first, then the scrolling site. */
 export function Invitation() {
@@ -69,10 +73,13 @@ export function Invitation() {
   return (
     <MotionConfig reducedMotion="user">
       <SmoothScroll locked={!opened}>
+        <Preloader />
+        <Cursor />
         {!introGone && <Intro guest={guest} autoOpen={autoOpen} onOpen={handleOpen} onDone={() => setIntroGone(true)} />}
         <TopBar opened={opened} />
         <main id="site" aria-hidden={!opened}>
           <Hero opened={opened} />
+          <Marquee />
           <Welcome guest={guest} />
           <Countdown />
           <InvitationCard />
@@ -90,7 +97,9 @@ export function Invitation() {
             </motion.button>
           </>
         )}
+        <MobileDock opened={opened} />
         <Petals active={opened} />
+        <div className="grain" aria-hidden="true" />
       </SmoothScroll>
     </MotionConfig>
   );

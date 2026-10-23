@@ -8,6 +8,7 @@ const variants: Record<string, Variants> = {
   up: { hidden: { opacity: 0, y: 34 }, show: { opacity: 1, y: 0 } },
   zoom: { hidden: { opacity: 0, scale: 0.94 }, show: { opacity: 1, scale: 1 } },
   fade: { hidden: { opacity: 0 }, show: { opacity: 1 } },
+  wipe: { hidden: { clipPath: "inset(100% -30% -30% -30%)", opacity: 0.4 }, show: { clipPath: "inset(-30% -30% -30% -30%)", opacity: 1 } },
   blur: { hidden: { opacity: 0, y: 20, filter: "blur(8px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)" } },
 };
 

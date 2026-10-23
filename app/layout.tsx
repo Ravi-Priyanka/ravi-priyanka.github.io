@@ -13,12 +13,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Ravindra & Saumya · Wedding Invitation · 9 December 2026",
+  title: "Ravi & Priyanka · Wedding Invitation · 9 December 2026",
   description: "Ravindra (Ravi) & Saumya (Priyanka) request the pleasure of your company at their wedding on Wednesday, 9 December 2026 in Pindwara, Rajasthan.",
   icons: { icon: "/favicon.svg" },
   openGraph: {
     type: "website",
-    title: "Ravindra & Saumya · Wedding Invitation",
+    title: "Ravi & Priyanka · Wedding Invitation",
     description: "Wednesday, 9 December 2026 · Pindwara, Rajasthan. You and your family are warmly invited.",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },

@@ -22,3 +22,16 @@ export function downloadIcs(e: WeddingEvent) {
   a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
+
+/** Opens the event straight in Google Calendar (best on Android). */
+export function googleCalendarUrl(e: WeddingEvent) {
+  const { groom, bride } = WEDDING.couple;
+  const p = new URLSearchParams({
+    action: "TEMPLATE",
+    text: `${e.name} — ${groom} & ${bride}`,
+    dates: `${icsDate(e.start)}/${icsDate(e.end)}`,
+    location: e.venue,
+    details: `${e.day}, ${e.date} · ${e.time}\n${e.note}`,
+  });
+  return `https://calendar.google.com/calendar/render?${p.toString()}`;
+}
