@@ -14,7 +14,7 @@ export const WEDDING = {
   couple: {
     groom: "Ravi",
     bride: "Priyanka",
-    groomFull: "Ravindra Parmar",
+    groomFull: "Ravindra",
     groomNick: "Ravi",
     brideFull: "Saumya",
     brideNick: "Priyanka",
@@ -187,8 +187,8 @@ export const WEDDING = {
   contacts: [
     { name: "Shri Bhanwarlalji Parmar", phone: "9820162732" },
     { name: "Shri Veeraramji Parmar", phone: "9819183391" },
-    { name: "Ravi", phone: "7303366970" },
-    { name: "Khushal", phone: "8976352508" }
+    { name: "Ravi Parmar", phone: "7303366970" },
+    { name: "Khushal Parmar", phone: "8976352508" }
   ]
 };
 
