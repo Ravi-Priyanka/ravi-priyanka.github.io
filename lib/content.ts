@@ -56,7 +56,7 @@ export const WEDDING = {
     groomLine: "Ravindra Parmar (Ravi)",
     groomFamily: [
       "Grandson of Smt. Tulsidevi & the late Shri Anaji Parmar",
-      "Son of Smt. Bebydevi & Shri Bhanwarlalji Parmar",
+      "Son of Smt. Babydevi & Shri Bhanwarlalji Parmar",
       "Village Pindwara, District Sirohi, Rajasthan – 307022"
     ],
     withWord: "with",
@@ -153,7 +153,7 @@ export const WEDDING = {
         "Smt. Jamnadevi & Shri Raghunathji Parmar",
         "Smt. Shantidevi & Shri Veeraramji Parmar",
         "The late Smt. Savitadevi & Shri Chelaramji Parmar",
-        "Smt. Bebydevi & Shri Bhanwarlalji Parmar",
+        "Smt. Babydevi & Shri Bhanwarlalji Parmar",
         "Smt. Mamtadevi & Shri Dineshji Parmar",
         "Smt. Mamtadevi & Shri Yogeshji Parmar"
       ],
