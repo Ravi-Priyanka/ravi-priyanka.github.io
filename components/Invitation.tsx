@@ -16,6 +16,7 @@ import { Baraat } from "./Baraat";
 import { Events } from "./Events";
 import { Family } from "./Family";
 import { Closing } from "./Closing";
+import { LoveQuiz } from "./LoveQuiz";
 import { Petals, burstPetals } from "./Petals";
 import { Svg } from "./Svg";
 import { Preloader } from "./Preloader";
@@ -96,6 +97,7 @@ export function Invitation() {
           <Baraat />
           <Events />
           <Family />
+          <LoveQuiz guest={guest} />
           <Closing />
         </main>
         {music && (

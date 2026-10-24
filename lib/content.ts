@@ -8,6 +8,8 @@ export const WEDDING = {
     // Countdown counts down to the wedding ceremony (4:00 AM after Wednesday night, India time).
     countdownTo: "2026-12-10T04:00:00+05:30",
     // Background song (starts when the doors open). Replace the file in public/ to change it; set "" to turn music off.
+    // Love-quiz submissions go to this Google Apps Script web-app URL (see apps-script/quiz.gs). Empty = not saved.
+    quizEndpoint: "https://script.google.com/macros/s/AKfycbzHQEBz71z-LZP7khihqicuDPLENueqT0jkISl2pLkpyqYtiiw19aiEpnzV2sYQ9vDW5w/exec",
     music: "/music-rajasthani.m4a" // "Free Soul Indian Rajasthani Style Cinematic Music" by kalsstockmedia (Pixabay, royalty-free)
   },
 
