@@ -166,7 +166,7 @@ export const WEDDING = {
     {
       title: "Sons-in-law & Daughters", tab: "Sons-in-law", sub: "Jamai Paksh",
       names: [
-        "Smt. Falgunidevi & Shri Kaluramji Devda",
+        "Smt. Falgunidevi & Shri Kaluramji Deora",
         "Smt. Savitadevi & Shri Gopalji Bhati",
         "Smt. Vimladevi & Shri Mahendraji Gehlot",
         "Smt. Kamladevi & Shri Shankarlalji Bhati",
