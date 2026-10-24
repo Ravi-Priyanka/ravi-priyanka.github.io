@@ -1044,3 +1044,41 @@ body:not(.opened) .scroll-cue[data-in] { transform: translateY(22px); }
   .grain { display: none; }
   .cd-unit, .ft-col, .contact, .mithi { backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
+
+/* =========================================================
+   Top bar v2 — centred arch monogram logo
+   ========================================================= */
+.topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: clamp(16px, 4vw, 48px); padding-block: 6px; }
+.topbar .tb-side { display: none; gap: clamp(20px, 3vw, 40px); }
+.topbar .tb-side.left { justify-content: flex-end; }
+.topbar .tb-side.right { justify-content: flex-start; }
+.topbar .tb-side a { font-family: var(--f-ui); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; color: var(--muted); position: relative; padding: 6px 0; }
+.topbar .tb-side a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--gold); transition: right .35s var(--ease); }
+.topbar .tb-side a:hover, .topbar .tb-side a.active { color: var(--wine); }
+.topbar .tb-side a:hover::after, .topbar .tb-side a.active::after { right: 0; }
+@media (min-width: 900px) { .topbar .tb-side { display: flex; } }
+.tb-logo { grid-column: 2; display: block; width: clamp(92px, 12vw, 112px); line-height: 0; transition: transform .4s var(--ease); }
+.tb-logo:hover { transform: translateY(-1px) scale(1.03); }
+.tb-logo svg { width: 100%; height: auto; overflow: visible; }
+.tb-logo .arch { fill: none; stroke: var(--gold); stroke-width: 1.3; }
+.tb-logo .arch.in { stroke-opacity: .45; stroke-width: .9; }
+.tb-logo .gem { fill: var(--gold); }
+.tb-logo .rule { stroke: var(--gold); stroke-width: 1; stroke-opacity: .7; }
+.tb-logo text { font-family: var(--f-play); font-style: italic; font-size: 25px; letter-spacing: -.5px; }
+.tb-logo .l { fill: var(--wine); }
+.tb-logo .amp { fill: var(--gold); font-size: 18px; }
+
+/* Dock: solid rich wine so it looks the same over light and dark sections */
+.dock {
+  background: linear-gradient(165deg, #6A1C3A 0%, #4A0F27 55%, #2E0818 100%);
+  border: 1px solid rgba(215,180,106,.6);
+  box-shadow: 0 18px 38px -12px rgba(40,6,20,.55), 0 4px 10px -4px rgba(40,6,20,.35), inset 0 1px 0 rgba(255,236,200,.14);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.dock-item { color: #F3E3B8; }
+.dock-item svg { stroke-width: 1.6; }
+.dock-item span { opacity: .92; }
+.dock-item.on { color: #3A0C1E; }
+.dock-item.on span { opacity: 1; font-weight: 500; }
+.dock-pill { box-shadow: 0 4px 12px -2px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35); }
+.music-btn { background: linear-gradient(165deg, #6A1C3A, #3A0C1E); border-color: rgba(215,180,106,.6); color: #F3E3B8; box-shadow: 0 12px 26px -10px rgba(40,6,20,.6), inset 0 1px 0 rgba(255,236,200,.14); }
