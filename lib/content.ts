@@ -9,7 +9,7 @@ export const WEDDING = {
     countdownTo: "2026-12-10T04:00:00+05:30",
     // Background song (starts when the doors open). Replace the file in public/ to change it; set "" to turn music off.
     // Love-quiz submissions go to this Google Apps Script web-app URL (see apps-script/quiz.gs). Empty = not saved.
-    quizEndpoint: "https://script.google.com/macros/s/AKfycbzHQEBz71z-LZP7khihqicuDPLENueqT0jkISl2pLkpyqYtiiw19aiEpnzV2sYQ9vDW5w/exec",
+    quizEndpoint: "https://script.google.com/macros/s/AKfycbzYdaU3oCnMOr2kmgzQbqrpPIy21X6egEiNFJwlL-U6g6HCVKgEI32FG8E2Zl5RUSUuLQ/exec",
     music: "/music-rajasthani.m4a" // "Free Soul Indian Rajasthani Style Cinematic Music" by kalsstockmedia (Pixabay, royalty-free)
   },
 
