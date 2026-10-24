@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { WEDDING } from "@/lib/content";
-import { COMPLIMENTS, QUESTIONS, STATUSES, TYPES, loveScore, type Status, type TypeKey } from "@/lib/quiz";
+import { COMPLIMENTS, QUESTIONS, STATUSES, TYPES, hasPlayedQuiz, loveScore, markQuizPlayed, type Status, type TypeKey } from "@/lib/quiz";
 import { SplitTitle } from "./SplitTitle";
 import { Magnetic } from "./Magnetic";
 import { burstPetals } from "./Petals";
 
 const EASE = [0.2, 0.75, 0.2, 1] as const;
+const DUP = "This email or mobile number has already played — each guest can enter once. Thank you for playing 💛";
 const TOTAL = QUESTIONS.length + 1; // status + fun questions
 const slide = {
   initial: { opacity: 0, x: 40, scale: 0.98 },
@@ -16,14 +17,14 @@ const slide = {
   exit: { opacity: 0, x: -40, scale: 0.98, transition: { duration: 0.3 } },
 };
 
-type Details = { name: string; email: string; phone: string; consent: boolean };
+type Details = { name: string; email: string; phone: string };
 
 /** "What's your love story?" — a short romantic quiz that ends in a personalised reading. */
 export function LoveQuiz({ guest }: { guest: string }) {
   const [step, setStep] = useState(0); // 0 intro · 1 status · 2..5 questions · 6 details · 7 result
   const [status, setStatus] = useState<Status | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
-  const [d, setD] = useState<Details>({ name: "", email: "", phone: "", consent: false });
+  const [d, setD] = useState<Details>({ name: "", email: "", phone: "" });
   const [err, setErr] = useState("");
   const [saved, setSaved] = useState<"no" | "sending" | "yes">("no");
 
@@ -44,10 +45,10 @@ export function LoveQuiz({ guest }: { guest: string }) {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const phone = d.phone.replace(/\D/g, "").replace(/^91(?=\d{10}$)/, "");
-    if (d.name.trim().length < 2) return setErr("Please tell us your name.");
+    if (d.name.trim().length < 2) return setErr("Please tell us your full name.");
     if (!/^\S+@\S+\.\S+$/.test(d.email.trim())) return setErr("Please enter a valid email address.");
     if (!/^[6-9]\d{9}$/.test(phone)) return setErr("Please enter a valid 10-digit mobile number.");
-    if (!d.consent) return setErr("Please tick the box to let us save your details.");
+    if (hasPlayedQuiz(d.email, phone)) return setErr(DUP);
     setErr("");
     const endpoint = WEDDING.config.quizEndpoint;
     if (endpoint) {
@@ -57,7 +58,16 @@ export function LoveQuiz({ guest }: { guest: string }) {
         ...Object.fromEntries(QUESTIONS.map((q, i) => [`q${i + 1}`, q.options[answers[i]]?.label ?? ""])),
         result: TYPES[result].title, score: String(loveScore(d.name)), invitedAs: guest, submittedAt: new Date().toISOString(),
       });
-      try { await fetch(endpoint, { method: "POST", mode: "no-cors", body: data }); setSaved("yes"); } catch { setSaved("no"); }
+      try {
+        const res = await fetch(endpoint, { method: "POST", body: data });
+        const out = await res.json().catch(() => ({ ok: true }));
+        if (out && out.duplicate) { setSaved("no"); markQuizPlayed(d.email, phone); return setErr(DUP); }
+        setSaved("yes");
+      } catch {
+        // The request may still have reached the sheet even if the reply could not be read.
+        setSaved("yes");
+      }
+      markQuizPlayed(d.email, phone);
     }
     reveal();
   };
@@ -126,24 +136,19 @@ export function LoveQuiz({ guest }: { guest: string }) {
               <motion.div className="qz-sealed" aria-hidden="true" animate={{ rotate: [0, -6, 6, 0] }} transition={{ repeat: Infinity, duration: 2.4 }}>💌</motion.div>
               <h3>Your reading is ready!</h3>
               <p className="qz-note">Tell us who you are so we can personalise it — and keep in touch about the wedding.</p>
-              <label className="qz-field"><span>Your name</span>
-                <input type="text" autoComplete="name" value={d.name} onChange={e => setD({ ...d, name: e.target.value })} placeholder="e.g. Anjali Sharma" />
+              <label className="qz-field"><span>Your full name</span>
+                <input type="text" autoComplete="name" value={d.name} onChange={e => setD({ ...d, name: e.target.value })} />
               </label>
               <label className="qz-field"><span>Email</span>
-                <input type="email" autoComplete="email" inputMode="email" value={d.email} onChange={e => setD({ ...d, email: e.target.value })} placeholder="you@example.com" />
+                <input type="email" autoComplete="email" inputMode="email" value={d.email} onChange={e => setD({ ...d, email: e.target.value })} />
               </label>
               <label className="qz-field"><span>Mobile number</span>
                 <div className="qz-phone"><b>+91</b>
-                  <input type="tel" autoComplete="tel-national" inputMode="numeric" value={d.phone} onChange={e => setD({ ...d, phone: e.target.value })} placeholder="98765 43210" />
+                  <input type="tel" autoComplete="tel-national" inputMode="numeric" value={d.phone} onChange={e => setD({ ...d, phone: e.target.value })} />
                 </div>
-              </label>
-              <label className="qz-consent">
-                <input type="checkbox" checked={d.consent} onChange={e => setD({ ...d, consent: e.target.checked })} />
-                <span>I agree that the Parmar family may save my <b>name, email, phone number, relationship status and quiz answers</b> to keep in touch about Ravi &amp; Priyanka&apos;s wedding. It won&apos;t be shared with anyone else, and I can ask for it to be deleted at any time.</span>
               </label>
               {err && <p className="qz-err" role="alert">{err}</p>}
               <Magnetic><button type="submit" className="btn solid qz-cta" disabled={saved === "sending"}>{saved === "sending" ? "Saving…" : "Reveal my reading ✨"}</button></Magnetic>
-              <button type="button" className="qz-skip" onClick={reveal}>Skip — just show my result</button>
             </motion.form>
           )}
 

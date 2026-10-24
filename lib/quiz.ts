@@ -73,3 +73,24 @@ export function loveScore(name: string) {
   for (const ch of name.trim().toLowerCase()) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
   return 88 + (h % 12);
 }
+
+/* ---- One entry per guest ---- */
+const PLAYED_KEY = "rp-love-quiz";
+
+export const normEmail = (e: string) => e.trim().toLowerCase();
+export const normPhone = (p: string) => p.replace(/\D/g, "").slice(-10);
+
+/** Remembers on this device which email/number already submitted. */
+export function markQuizPlayed(email: string, phone: string) {
+  try { localStorage.setItem(PLAYED_KEY, JSON.stringify({ email: normEmail(email), phone: normPhone(phone) })); } catch {}
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("quiz-played"));
+}
+
+export function hasPlayedQuiz(email?: string, phone?: string) {
+  try {
+    const v = JSON.parse(localStorage.getItem(PLAYED_KEY) || "null");
+    if (!v) return false;
+    if (email === undefined) return true;
+    return v.email === normEmail(email) || v.phone === normPhone(phone ?? "");
+  } catch { return false; }
+}

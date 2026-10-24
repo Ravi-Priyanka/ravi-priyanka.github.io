@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { MotionConfig, motion } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { WEDDING } from "@/lib/content";
-import { ui } from "@/lib/art";
 import { SmoothScroll } from "./SmoothScroll";
 import { Intro } from "./Intro";
 import { TopBar } from "./TopBar";
@@ -18,11 +17,11 @@ import { Family } from "./Family";
 import { Closing } from "./Closing";
 import { LoveQuiz } from "./LoveQuiz";
 import { Petals, burstPetals } from "./Petals";
-import { Svg } from "./Svg";
 import { Preloader } from "./Preloader";
 import { Cursor } from "./Cursor";
 import { Marquee } from "./Marquee";
 import { MobileDock } from "./MobileDock";
+import { QuizFab } from "./QuizFab";
 
 /** The whole invitation: palace doors first, then the scrolling site. */
 export function Invitation() {
@@ -103,12 +102,20 @@ export function Invitation() {
         {music && (
           <>
             <audio ref={audio} src={music} loop preload="auto" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} />
-            <motion.button className={`music-btn${playing ? " playing" : ""}`} type="button" aria-label="Play or pause music"
+            <motion.button className={`music-btn${playing ? " playing" : " muted"}`} type="button"
+              aria-label={playing ? "Pause music" : "Play music"} aria-pressed={playing} title={playing ? "Music on — tap to pause" : "Music off — tap to play"}
               onClick={toggleMusic} whileTap={{ scale: 0.9 }} initial={{ opacity: 0, scale: 0.5 }} animate={opened ? { opacity: 1, scale: 1 } : {}}>
-              <span className="ring" /><Svg html={ui.music} />
+              <span className="ring" />
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="mb-icon">
+                <path d="M9 18V6l11-2v12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="6.5" cy="18" r="2.5" fill="currentColor" /><circle cx="17.5" cy="16" r="2.5" fill="currentColor" />
+                {!playing && <path className="slash" d="M3 3 L21 21" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
+              </svg>
+              {playing && <span className="mb-bars" aria-hidden="true"><i /><i /><i /></span>}
             </motion.button>
           </>
         )}
+        <QuizFab opened={opened} />
         <MobileDock opened={opened} />
         <Petals active={opened} />
         <div className="grain" aria-hidden="true" />

@@ -9,9 +9,13 @@
  *       Execute as:  Me
  *       Who has access: Anyone
  *     Click Deploy, then "Authorize access" and allow it with your Google account.
- *  4. Copy the "Web app URL" (ends in /exec) and send it to set in lib/content.ts → config.quizEndpoint.
+ *  4. Copy the "Web app URL" (ends in /exec) and set it in lib/content.ts → config.quizEndpoint.
+ *
+ * Updating later WITHOUT changing the URL:
+ *  Deploy → Manage deployments → pencil icon → Version: "New version" → Deploy.
  *
  * Each guest's answers are added as a new row on a tab named "Love Quiz" (created automatically).
+ * Each email address or mobile number can submit only once; repeats are refused.
  * Nothing else in the spreadsheet is changed.
  */
 const SHEET_NAME = "Love Quiz";
@@ -29,6 +33,8 @@ const FIELDS = [
   ["score", "Love score"],
   ["invitedAs", "Invite link name"],
 ];
+const EMAIL_COL = 3; // column C
+const PHONE_COL = 4; // column D
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -43,13 +49,29 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
     const p = (e && e.parameter) || {};
+
+    // One entry per email or mobile number.
+    const email = normEmail(p.email), phone = normPhone(p.phone);
+    const last = sheet.getLastRow();
+    if (last > 1 && (email || phone)) {
+      const rows = sheet.getRange(2, EMAIL_COL, last - 1, 2).getValues();
+      const dup = rows.some(r => (email && normEmail(r[0]) === email) || (phone && normPhone(r[1]) === phone));
+      if (dup) return json({ ok: false, duplicate: true });
+    }
+
     const row = FIELDS.map(([key]) => clean(key === "submittedAt" ? new Date().toISOString() : p[key]));
     sheet.appendRow(row);
-    return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
+    return json({ ok: true });
   } finally {
     lock.releaseLock();
   }
 }
+
+function json(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+function normEmail(v) { return String(v == null ? "" : v).trim().toLowerCase(); }
+function normPhone(v) { return String(v == null ? "" : v).replace(/\D/g, "").slice(-10); }
 
 /** Keeps entries short and stops anything that looks like a spreadsheet formula from running. */
 function clean(v) {

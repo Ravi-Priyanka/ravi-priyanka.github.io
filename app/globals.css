@@ -1160,3 +1160,43 @@ body:not(.opened) .scroll-cue[data-in] { transform: translateY(22px); }
   .ft-bottom { flex-direction: column; justify-content: center; text-align: center; gap: 14px; padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
   .ft-bottom p { max-width: 260px; }
 }
+
+/* Music button: clear on / off states */
+.music-btn .ring { animation-play-state: paused; }
+.music-btn.playing .ring { animation-play-state: running; animation-duration: 6s; }
+.music-btn.muted { opacity: .78; filter: saturate(.6); }
+.music-btn.muted .ring { border-style: dashed; opacity: .45; }
+.music-btn .mb-icon { width: 20px; height: 20px; position: relative; }
+.music-btn .slash { stroke: #F3E3B8; filter: drop-shadow(0 0 1px #3A0C1E) drop-shadow(0 0 1px #3A0C1E); }
+.music-btn.playing svg { animation: none; }
+.mb-bars { position: absolute; right: 8px; bottom: 10px; display: flex; gap: 1.5px; align-items: flex-end; height: 9px; }
+.mb-bars i { width: 2px; height: 100%; border-radius: 1px; background: var(--gold-2); transform-origin: bottom; animation: eq .9s ease-in-out infinite alternate; }
+.mb-bars i:nth-child(2) { animation-delay: -.3s; } .mb-bars i:nth-child(3) { animation-delay: -.6s; }
+@keyframes eq { 0% { transform: scaleY(.3); } 100% { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .mb-bars i { animation: none; transform: scaleY(.7); } }
+
+/* Floating "play the love quiz" button, stacked above the music button */
+.quiz-fab {
+  position: fixed; z-index: 70; right: max(16px, env(safe-area-inset-right)); bottom: calc(max(18px, env(safe-area-inset-bottom)) + 62px);
+  width: 50px; height: 50px; border-radius: 50%; border: 1px solid rgba(215,180,106,.6); padding: 0;
+  background: linear-gradient(165deg, #C2456E, #8A1E45 60%, #5A0F2C); display: grid; place-items: center; cursor: pointer;
+  box-shadow: 0 12px 26px -10px rgba(90,15,44,.7), inset 0 1px 0 rgba(255,236,200,.2);
+}
+.quiz-fab .qf-heart { font-size: 1.35rem; line-height: 1; display: block; }
+.quiz-fab .qf-pulse { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(232,120,160,.7); animation: qfPulse 2s ease-out infinite; }
+@keyframes qfPulse { from { transform: scale(1); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+.quiz-fab .qf-hint {
+  position: absolute; right: calc(100% + 10px); top: 50%; translate: 0 -50%; white-space: nowrap;
+  font-family: var(--f-ui); font-size: .78rem; letter-spacing: .02em; color: #4A0F27;
+  background: #FFF6EC; border: 1px solid rgba(215,180,106,.7); padding: 7px 14px; border-radius: 999px;
+  box-shadow: 0 10px 22px -10px rgba(40,6,20,.5);
+}
+@media (max-width: 899px) { .quiz-fab { bottom: calc(84px + env(safe-area-inset-bottom) + 62px); } }
+@media (prefers-reduced-motion: reduce) { .quiz-fab .qf-pulse { animation: none; } }
+.qz-err .qz-err-skip { display: block; margin-top: 6px; }
+/* Quiz button matches the music button: wine glass + gold line icon */
+.quiz-fab { background: linear-gradient(165deg, #6A1C3A, #3A0C1E); border-color: rgba(215,180,106,.6); color: #F3E3B8;
+  box-shadow: 0 12px 26px -10px rgba(40,6,20,.6), inset 0 1px 0 rgba(255,236,200,.14); }
+.quiz-fab .qf-heart { width: 22px; height: 22px; font-size: 0; }
+.quiz-fab .qf-pulse { border: 1px solid rgba(215,180,106,.75); }
+.music-btn.muted { opacity: 1; filter: none; }
