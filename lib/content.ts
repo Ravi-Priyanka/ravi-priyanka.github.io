@@ -190,7 +190,8 @@ export const WEDDING = {
         "The late Shri Govind Das Prajapati",
         "Daughter of Smt. Krishna Kumari & the late Shri Narendra Kumar Prajapati",
         "Shri Ramsevak Prajapati",
-        "Smt. Nisha & Shri Bhupendra Prajapati"
+        "Nisha Prajapati",
+        "Bhupendra Prajapati"
       ]
     }
   ],
