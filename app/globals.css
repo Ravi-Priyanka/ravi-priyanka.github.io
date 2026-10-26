@@ -1007,8 +1007,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 /* Family tabs v3: light text tabs with a gliding gold underline */
 .fam-tabs {
   background: none; border: 0; box-shadow: none; border-radius: 0; padding: 0;
-  max-width: 720px; gap: 0; border-bottom: 1px solid rgba(184,137,58,.35); margin-bottom: 38px;
-  grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr;
+  max-width: 640px; gap: 0; border-bottom: 1px solid rgba(184,137,58,.35); margin-bottom: 38px;
 }
 .fam-tab { padding: 10px 6px 16px; gap: 4px; border-radius: 0; color: var(--muted); transition: color .35s; }
 .fam-tab:hover { color: var(--wine); }
@@ -1201,3 +1200,34 @@ body:not(.opened) .scroll-cue[data-in] { transform: translateY(22px); }
 .quiz-fab .qf-heart { width: 22px; height: 22px; font-size: 0; }
 .quiz-fab .qf-pulse { border: 1px solid rgba(215,180,106,.75); }
 .music-btn.muted { opacity: 1; filter: none; }
+
+/* Family tabs v4: pill buttons, one row on wide screens and a 2x2 grid on phones.
+   The selected pill is filled wine (the .fam-ind glides between pills). */
+.fam-tabs {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  max-width: 760px; margin: 0 auto 34px; padding: 0;
+  background: none; border: 0; border-radius: 0; box-shadow: none;
+}
+.fam-tab {
+  position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 60px; padding: 10px 12px; gap: 3px; border-radius: 999px;
+  border: 1px solid rgba(184,137,58,.45); background: rgba(255,253,248,.8); color: var(--wine);
+  transition: color .35s, border-color .35s, background .35s;
+}
+.fam-tab:hover { color: var(--wine); border-color: var(--gold); background: #FFFDF8; }
+.fam-tab.on, .fam-tab.on:hover { color: var(--ivory); border-color: transparent; }
+.fam-tab b { font-family: var(--f-play); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: clamp(1rem, 2.2vw, 1.1rem); line-height: 1.15; white-space: nowrap; }
+.fam-tab small, .fam-tab.on small { display: block; margin: 0; font-family: var(--f-caps); font-style: normal; text-transform: uppercase; letter-spacing: .16em; font-size: .52rem; white-space: nowrap; color: var(--gold); }
+.fam-tab.on small { color: var(--gold-2); }
+.fam-tab .fam-ind {
+  position: absolute; inset: 0; top: 0; bottom: 0; left: 0; width: auto; height: auto; z-index: -1; border-radius: inherit;
+  background: linear-gradient(135deg, var(--maroon), var(--wine-deep));
+  box-shadow: 0 10px 20px -10px rgba(90,22,48,.7), inset 0 0 0 1px rgba(215,180,106,.55);
+}
+.fam-tab .fam-ind i { display: none; }
+@media (max-width: 640px) {
+  .fam-tabs { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .fam-tab { border-radius: 18px; min-height: 62px; padding: 10px 8px; }
+  .fam-tab b { font-size: 1.02rem; letter-spacing: 0; }
+  .fam-tab small, .fam-tab.on small { display: block; font-size: .5rem; letter-spacing: .12em; }
+}
