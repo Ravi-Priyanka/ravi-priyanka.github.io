@@ -1007,7 +1007,8 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 /* Family tabs v3: light text tabs with a gliding gold underline */
 .fam-tabs {
   background: none; border: 0; box-shadow: none; border-radius: 0; padding: 0;
-  max-width: 640px; gap: 0; border-bottom: 1px solid rgba(184,137,58,.35); margin-bottom: 38px;
+  max-width: 720px; gap: 0; border-bottom: 1px solid rgba(184,137,58,.35); margin-bottom: 38px;
+  grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr;
 }
 .fam-tab { padding: 10px 6px 16px; gap: 4px; border-radius: 0; color: var(--muted); transition: color .35s; }
 .fam-tab:hover { color: var(--wine); }

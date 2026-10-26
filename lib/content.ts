@@ -183,6 +183,15 @@ export const WEDDING = {
         "Smt. Monikadevi & Shri Mahendraji Bhati",
         "and the entire Bhati family"
       ]
+    },
+    {
+      title: "Bride's Family", tab: "Bride's Side", sub: "Kanya Paksh",
+      names: [
+        "The late Shri Govind Das Prajapati",
+        "Daughter of Smt. Krishna Kumari & the late Shri Narendra Kumar Prajapati",
+        "Shri Ramsevak Prajapati",
+        "Smt. Nisha & Shri Bhupendra Prajapati"
+      ]
     }
   ],
 
