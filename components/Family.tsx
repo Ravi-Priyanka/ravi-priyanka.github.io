@@ -28,10 +28,25 @@ const chip: Variants = {
 /** Each line on a plate starts with a capital ("the late …" → "The late …"). */
 const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
-function Plate({ name }: { name: string }) {
+const isCouple = (n: string) => n.split(" & ").length === 2;
+
+/** On the 2-column desktop grid, a couple plate left alone in its row spans the full width. */
+function widePlates(names: readonly string[]) {
+  const wide = new Set<number>();
+  let run = 0;
+  names.forEach((n, i) => {
+    if (!isCouple(n)) { run = 0; return; }
+    run++;
+    const endsRun = i === names.length - 1 || !isCouple(names[i + 1]);
+    if (endsRun && run % 2 === 1) wide.add(i);
+  });
+  return wide;
+}
+
+function Plate({ name, wide }: { name: string; wide?: boolean }) {
   const parts = name.split(" & ").map(cap);
   return (
-    <motion.li className={`plate${parts.length === 2 ? "" : " note"}`} variants={item} whileHover={{ y: -4 }}>
+    <motion.li className={`plate${parts.length === 2 ? "" : " note"}${wide ? " wide" : ""}`} variants={item} whileHover={{ y: -4 }}>
       <span className="p1">{parts[0]}</span>
       {parts.length === 2 && <><span className="pamp">&amp;</span><span className="p2">{parts[1]}</span></>}
     </motion.li>
@@ -80,7 +95,7 @@ export function Family() {
             <motion.h3 variants={item}>{g.title}</motion.h3>
             <motion.div variants={item}><Svg html={divider()} /></motion.div>
             <motion.ul className="plates" variants={panel}>
-              {g.names.map(n => <Plate key={n} name={n} />)}
+              {(() => { const wide = widePlates(g.names); return g.names.map((n, i) => <Plate key={n} name={n} wide={wide.has(i)} />); })()}
             </motion.ul>
             {extra.length > 0 && (
               <motion.div className="kids-chips" variants={panel}>

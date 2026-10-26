@@ -500,7 +500,7 @@ body.opened [data-in="7"] { transition-delay: 2s; }
 .kids-chips span { font-family: var(--f-ui); font-weight: 400; font-size: .8rem; letter-spacing: .04em; color: var(--wine); padding: 6px 14px; border-radius: 999px; background: var(--blush); border: 1px solid rgba(184,137,58,.3); }
 @media (min-width: 720px) {
   .plates { grid-template-columns: repeat(2, 1fr); gap: 16px 18px; }
-  .plate.note { grid-column: 1 / -1; }
+  .plate.note, .plate.wide { grid-column: 1 / -1; }
 }
 @media (max-width: 420px) { .fam-tab small { display: none; } .fam-tab { padding: 12px 4px; } }
 
